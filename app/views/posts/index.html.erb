@@ -1,1 +1,10 @@
-<h1><%= @places.inspect %></h1>  
+<h1><%= @posts.each do |post| %></h1>  
+  <div>
+    <h1><%= post.name %></h1><br />
+    <p><%= post.body %></p><br />
+  </div>
+
+  <hr />
+<% end %>
+
+
