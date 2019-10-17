@@ -2,11 +2,11 @@
   <div class="booyah-box">
     <h1><%= post.name %></h1><br />
     <p><%= post.body %></p><br />
-  </div>
-
+    <% if post.user.present? %>
+      <small><%= post.user.email %></small>
+    <% end %>
   <hr />
-
-
+  </div>
 <% end %> 
 
 <%= will_paginate @posts %>
