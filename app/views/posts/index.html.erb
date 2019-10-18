@@ -1,6 +1,6 @@
 <h1><% @posts.each do |post| %></h1>  
   <div class="booyah-box">
-    <h1><%= post.name %></h1><br />
+    <h1><%= link_to post.name, post_path(post) %></h1><br />
     <p><%= post.body %></p><br />
     <% if post.user.present? %>
       <small><%= post.user.email %></small>
