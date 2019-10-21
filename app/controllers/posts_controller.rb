@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @posts = Post.all().paginate(page: params[:page], per_page: 5)
+    @posts = Post.all.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def new 
@@ -15,6 +15,10 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+  end
+
+  def edit
     @post = Post.find(params[:id])
   end
 

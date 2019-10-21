@@ -2,4 +2,6 @@
 <div class="booyah-box col-10 offset-1">
   <h1><%= @post.name %></h1>
   <i><%= @post.body %></i>
+  <br/>
+  <%= link_to 'Edit', edit_post_path(@post) %>
 </div>
