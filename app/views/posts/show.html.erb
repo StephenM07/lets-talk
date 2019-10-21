@@ -4,4 +4,6 @@
   <i><%= @post.body %></i>
   <br/>
   <%= link_to 'Edit', edit_post_path(@post) %>
+  <br/>
+  <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm: 'Are you sure you want to delete this post?'}, color: 'red' %>
 </div>
