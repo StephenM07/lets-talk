@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def index
     @posts = Post.all.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
@@ -20,10 +20,19 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+
+    if @post.user != current_user
+      return render plain: 'Not Allowed', status: :forbidden
+    end
   end
 
   def update
     @post = Post.find(params[:id])
+
+    if @post.user != current_user
+      return render plain: 'Not Allowed', status: :forbidden
+    end
+
     @post.update_attributes(post_params)
     redirect_to root_path
   end
