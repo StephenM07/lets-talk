@@ -10,8 +10,12 @@ class PostsController < ApplicationController
   end
 
   def create
-   current_user.posts.create(post_params)
-   redirect_to root_path
+    @post = current_user.posts.create(post_params)
+    if @post.valid?
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -34,8 +38,13 @@ class PostsController < ApplicationController
     end
 
     @post.update_attributes(post_params)
-    redirect_to root_path
+    if @post.valid?
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
+
 
   def destroy
     @post = Post.find(params[:id])
@@ -43,7 +52,7 @@ class PostsController < ApplicationController
     if @post.user != current_user
       return render plain: 'Not Allowed', status: :forbidden
     end
-    
+
     @post.destroy
     redirect_to root_path
   end
